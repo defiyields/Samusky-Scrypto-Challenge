@@ -1,4 +1,4 @@
-# Basket
+## Basket
 
 Basket is a decentralized automated fund with the goal of providing increased performance relative to XRD and exposure to the growth of the radix ecosystem without
 the need to manage individual investments. The fund is managed by stakers who earn a positive or negative yield based on the relative performance of the tokens they 
@@ -6,10 +6,7 @@ get the fund to buy and are incentivised with fees. Investers into the fund rece
 
 ### Staking
 
-Stakes are created using Samusky tokens and tracked using StakeReceipt nfts. They have a four stage life cycle: staking, staked, unstaking, unstaked. This life cycle 
-is necessary because staking and unstaking must occur at rebalance to prevent gaming the mechanism. Stakes have an amount and a weight. When a stake is first created 
-the amount is set to the amount of tokens being staked. At the transition to being staked the weight is calculated using this amount and the current state of the 
-stake pool:
+Stakes are created using Samusky tokens and tracked using StakeReceipt nfts. They have a four stage life cycle: staking, staked, unstaking, and unstaked. This life cycle is necessary because staking and unstaking must occur at rebalance to prevent gaming the mechanism. Stakes have an amount and a weight. When a stake is first created the amount is set to the amount of tokens being staked. At the transition to being staked the weight is calculated using this amount and the current state of the stake pool:
 ```
 s = amount
 S = stake pool amount
