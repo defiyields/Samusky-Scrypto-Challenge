@@ -108,6 +108,9 @@ show(account)
 - `pool_A`
 - `pool_B`
 - `pool_C`
+- `lp_token_A`
+- `lp_token_B`
+- `lp_token_C`
 
 #### Functions
 - `show(address)`
@@ -129,3 +132,4 @@ show(account)
 - `get_total_stake()`
 - `get_stake_denominator()`
 - `amm_buy(amount, pool)`
+- `amm_remove_liquidity(amount, lp_token, pool)`
