@@ -68,14 +68,13 @@ over to a DAO to remove all centralization if it is deemed beneficial and suffic
 
 ### Investing in more than tokens?
 
-In order to rebalance the fund all investments must be immediately reverseable. However, many more complicated defi products can have their mechanism simplified down 
-to a simple token. This should allow the fund to get exposure to lp yield, options, and much more. There could even recursive layers of Baskets investing in other
-Baskets.
+In order to rebalance the fund all investments must be immediately reverseable. However, many complicated financial products can have their mechanism simplified down 
+to a token. This should allow Basket to invest into a variety of defi components.
 
 ### DEXs and Radiswap
 
 In order to buy and sell tokens Basket requires a amm dex. The current demo uses a modifided version of Radiswap, one of the scrypto examples from radixdlt. The 
-modification is a simple orcale function to provide price. In production, Basket would be able to make use of any available amm dex by making an adapter component 
+modification is a orcale function to provide price. In production, Basket will be able to make use of any available amm dex by making an adapter component 
 from the dex to the generic inferface that Basket uses.
 
 ### Getting started
