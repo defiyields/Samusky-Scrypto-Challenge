@@ -197,7 +197,7 @@ blueprint! {
         }
 
         pub fn get_price(&self) -> Decimal {
-            if self.a_pool.amount() == dec!(0) {
+            if self.a_pool.is_empty() {
                 dec!(0)
             } else {
                 self.b_pool.amount() / self.a_pool.amount()
