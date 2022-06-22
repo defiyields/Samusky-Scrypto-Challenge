@@ -21,8 +21,7 @@ S = stake pool amount
 
 b = a * S / D
 ```
-This creates a remainder that is then put into the radix reserve. Basket tokens with a value equal to the investment minus the fee are minted using the following 
-calculation:
+This creates a remainder which put into the radix reserve. An amount of Basket tokens with a value equal to the investment minus the fee are then minted and returned to the buyer:
 ```
 n = basket token amount to mint
 N = basket token total supply
@@ -31,7 +30,7 @@ v_t = total value of all assets (investments + reserve)
 
 n = a * N / (v_t - a)
 ```
-Note, this does not appear to be a linear equation as expected, but it in fact is as `v_t` is has a hidden term of `a` plus some delta from slippage from the buying. This is done so the buyer pays the cost of any slippage. Selling is more simple and works by selling the Basket tokens share of all assets. These mechanisms ensure the price of Basket tokens is pegged to the value of assets held by the fund.
+Note, this does not appear to be a linear function as expected, but it is as `v_t` is has a hidden term of `a` plus some delta from slippage from the buying. This is done so the buyer pays the cost of any slippage. Selling is more simple and works by selling the Basket tokens share of all assets. These mechanisms ensure the price of Basket tokens is pegged to the value of assets held by the fund.
 
 ### Staking
 
