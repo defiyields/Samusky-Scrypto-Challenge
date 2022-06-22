@@ -31,7 +31,7 @@ v_t = total value of all assets (investments + reserve)
 
 n = a * N / (v_t - a)
 ```
-Note, this does not appear to be a linear equation as expected, but it in fact is as `v_t` is has a hidden term of `a` plus some delta from slippage from the buying. This is done so the buyer pays the cost of any slippage. Selling is more simple and works by selling the share of all assets. These mechanisms ensure the price 
+Note, this does not appear to be a linear equation as expected, but it in fact is as `v_t` is has a hidden term of `a` plus some delta from slippage from the buying. This is done so the buyer pays the cost of any slippage. Selling is more simple and works by selling the tokens share of all assets. These mechanisms ensure the price 
 of Basket tokens is pegged to the value of assets held by the fund.
 
 ### Staking
