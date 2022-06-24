@@ -235,23 +235,23 @@ blueprint! {
             let mut amount: Decimal = radix_tokens.amount();
             
             // if there are stakers
-            let stake_denominator: Decimal = self.get_stake_denominator();
-            if stake_denominator != dec!(0) {
+            let total_stake: Decimal = self.get_total_stake();
+            if total_stake != dec!(0) {
                 // buy samusky token using fee to pay stakers
-                let total_stake: Decimal = self.get_total_stake();
                 let samusky_pool: AmmPool = self.samusky_amm_pool.into();
-                let fee_amount: Decimal = amount * self.fee_percent / dec!(100);
+                let radix_fee_amount: Decimal = amount * self.fee_percent / dec!(100);
                 let mut fee: Bucket = Bucket::new(self.samusky_token_address);
 
                 if samusky_pool.get_price() != dec!(0) {
-                    fee.put(samusky_pool.swap(radix_tokens.take(fee_amount)));
+                    fee.put(samusky_pool.swap(radix_tokens.take(radix_fee_amount)));
                 }
 
                 amount = radix_tokens.amount();
+                let fee_amount: Decimal = fee.amount();
 
                 // distribute samusky from fee among stakes
                 for i in 0..self.investments.len() {
-                    let calculated_fee_share: Decimal = fee.amount() * self.stake_pools[i].0.amount() / total_stake;
+                    let calculated_fee_share: Decimal = fee_amount * self.stake_pools[i].0.amount() / total_stake;
                     let fee_share: Decimal = if calculated_fee_share > fee.amount() {
                         fee.amount()
                     } else {
@@ -263,6 +263,7 @@ blueprint! {
                 self.stake_pools[0].0.put(fee);
 
                 // buy tokens according to stake ratios
+                let stake_denominator: Decimal = self.get_stake_denominator();
                 let prices: Vec<Decimal> = self.get_prices();
                 for i in 0..self.investments.len() {
                     // if liquidity
