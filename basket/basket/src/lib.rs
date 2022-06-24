@@ -567,18 +567,18 @@ blueprint! {
                 }
             }
 
-            // handle staking and unstaking and rebalance again if stakes changed, otherwise save prices
+            // save prices
+            let mut prices = self.get_prices();
+            for i in 0..self.investments.len() {
+                if prices[i] == dec!(0) {
+                    prices[i] = self.last_prices[i];
+                }
+            }
+            self.last_prices = prices;
+
+            // handle staking and unstaking and rebalance again if stakes changed
             if self.handle_staking() || self.handle_unstaking() {
                 self.rebalance();
-            } else {
-                let mut prices = self.get_prices();
-                for i in 0..self.investments.len() {
-                    if prices[i] == dec!(0) {
-                        prices[i] = self.last_prices[i];
-                    }
-                }
-
-                self.last_prices = prices;
             }
         }
 
