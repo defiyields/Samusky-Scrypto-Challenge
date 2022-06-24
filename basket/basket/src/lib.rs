@@ -538,11 +538,9 @@ blueprint! {
                     for i in 0..self.investments.len() {
                         let rebalance_amount: Decimal = if prices[i] == dec!(0) {
                             dec!(0)
-                        } else if amounts[i] == dec!(0) {
-                            total_value * self.stake_pools[i].0.amount() / stake_denominator
                         } else {
                             let value: Decimal =  prices[i] * amounts[i];
-                            ((self.stake_pools[i].0.amount() / stake_denominator) - (value / total_value)) * value
+                            total_value * self.stake_pools[i].0.amount() / stake_denominator - value
                         };
                         info!("Rebalance {} {}", i, rebalance_amount);
                         rebalance_amounts.push(rebalance_amount);
@@ -551,8 +549,15 @@ blueprint! {
                     // rebalance for negative amounts (sells)
                     for i in 0..self.investments.len() {
                         if rebalance_amounts[i] < dec!(0) {
+                            let calculated_sell_amount: Decimal = rebalance_amounts[i] / prices[i] * -1;
+                            let sell_amount: Decimal = if calculated_sell_amount > self.investments[i].amount() {
+                                self.investments[i].amount()
+                            } else {
+                                calculated_sell_amount
+                            };
+                            
                             let pool: AmmPool = self.amm_pools[i].into();
-                            let radix_tokens: Bucket = pool.swap(self.investments[i].take(rebalance_amounts[i] / prices[i] * -1));
+                            let radix_tokens: Bucket = pool.swap(self.investments[i].take(sell_amount));
                             self.radix_tokens.put(radix_tokens);
                         }
                     }

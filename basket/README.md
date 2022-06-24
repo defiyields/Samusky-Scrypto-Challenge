@@ -68,12 +68,12 @@ c = p_1 / (p_0 * m) - 1
 ```
 Stakes are changed by the mean adjusted change to reflect their perforance and the rebalance amounts are calculated:
 ```
-D = stake denominator
 r = rebalance amount
+D = stake denominator
 v = value of investment
 v_t = total value of all assets (investments + reserve)
 
-r = ((S / D) - (v / v_t)) * v
+r = v_t * S / D - v
 ```
 Investment values are changed by the rebalance amount by buying or selling.
 
