@@ -1,8 +1,8 @@
 ## Basket
 
-Basket is a decentralized automated fund with the goal of providing increased performance relative to XRD and exposure to the growth of the radix ecosystem without
+Basket is a decentralized automated fund with the goal of providing increased performance relative to XRD, and exposure to the growth of the radix ecosystem without
 the need to manage individual investments. The fund is managed by stakers who earn a positive or negative yield based on the relative performance of the tokens they 
-get the fund to buy and are incentivised with fees. Investers into the fund receive Basket tokens which are pegged to the the value of assets held by the fund.
+get the fund to buy, and are incentivised with fees. Investers into the fund receive Basket tokens which are pegged to the the value of assets held by the fund.
 
 ### Buying and selling
 
@@ -30,7 +30,7 @@ v_t = total value of all assets (investments + reserve)
 
 n = a * N / (v_t - a)
 ```
-Note, this does not appear to be a linear function as expected, but it is as `v_t` is has a hidden term of `a` plus some delta from slippage from the buying. This is done so the buyer pays the cost of any slippage. Selling is more simple and works by selling the Basket tokens share of all assets. These mechanisms ensure the price of Basket tokens is pegged to the value of assets held by the fund.
+Note, this does not appear to be a linear function as expected, but it is as `v_t` is has a hidden term of `a` plus some delta from slippage from the buying. This is done so the buyer pays the cost of any slippage. Selling is more simple and works by selling the Basket tokens share of all assets in the fund. These mechanisms ensure the price of Basket tokens is pegged to the value of assets held by the fund.
 
 ### Staking
 
@@ -52,7 +52,7 @@ share of the pool and update the amount. This updated amount is the amount the u
 
 In order for the ratio of the value of investments to track the ratio of stakes they must be regularly rebalanced. This is done by a public method that anyone can 
 call, as the more often the better. It is expected that this would be periodically done by the team behind Basket, but users staking or unstaking are also 
-incentivized to call this method in order to process the stake. To rebalance the following must be calculated:
+incentivized to call this method in order to process their stake. To rebalance the following must be calculated:
 ```
 m = mean
 S = stake pool amount
@@ -94,9 +94,9 @@ to a token. This should allow Basket to invest into a variety of defi components
 
 ### DEXs and Radiswap
 
-In order to buy and sell tokens Basket requires a amm dex. The current demo uses a modifided version of Radiswap, one of the scrypto examples from radixdlt. The 
-modification is a orcale function to provide price. In production, Basket will be able to make use of any available amm dex by making an adapter component 
-from the dex to the generic inferface that Basket uses.
+In order to buy and sell tokens Basket requires an AMM DEX. The current demo uses a modifided version of Radiswap, one of the scrypto examples from radixdlt. The 
+modification is a orcale function to provide price. In production, Basket will be able to make use of any available AMM DEX by making an adapter component 
+from the DEX to the generic inferface that Basket uses.
 
 ### Getting started
 
