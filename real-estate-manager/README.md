@@ -97,7 +97,7 @@ After made a sell order, the maker received a *order NFT* to keep track of their
 
 ### What bad things might happend on Real Estate Manager?
 
-**Real Estate NFTs transfer to an Unauthorized Account**: Unfortunately, current Scrypto version don't have access rule to restrict which account can have a specific resource, so citizens can still deposit their real estate NFTs to unauthorized accounts through the protocol (specifically only through the ***buy method*** of the ***Real Estate Market Place*** protocol).
+**Real Estate NFTs transfer to an Unauthorized Account**: Unfortunately, current Scrypto version doesn't have access rule to restrict which account can have a specific resource, so citizens can still deposit their real estate NFTs to unauthorized accounts through the protocol (specifically only through the ***buy method*** of the ***Real Estate Market Place*** protocol).
 
 Although such a bad thing might happend on the protocol, it wouldn't be a critical problem. Authorities or any organization use the citizen's account to verify the real estate NFTs can also do the extra work of verify their KYC SBT. Moreover, the *mis-transfered* real estate NFTs cannot be withdrawn ever again from the unauthorized account unless they are ***recalled*** by authorities or the unauthorized person request a KYC himself.
 
