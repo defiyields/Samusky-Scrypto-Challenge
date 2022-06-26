@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-This is a Permissioned, Secure Real Estate Manager Protocol blueprint package built on Radix Ledger to provide real estate manage solution for authorities.
+This is a Permissioned, Secure Real Estate Manager Protocol blueprint package built on Radix Ledger to provide real estate management solution for authorities.
 
 ## Main Features
 
