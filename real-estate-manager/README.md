@@ -66,6 +66,7 @@ The protocol is permissioned and require the KYC SBT to use. Anyone who isn't a 
 Real estate deeds of the community will be managed by 2 type of NFT to prove the *owner rights* of citizens who have the NFT on their wallet: 
 - Land Right's NFT: The NFT contain land information, included land's location, land's size and the building NFT id on that land (if the land contain a building).
 - Building Right's NFT: The NFT contain building information, included building's size, building's floor.
+
 1 land NFT can only contain 1 building NFT, this is for easier management, as well as trading on the market. If citizens want to build another building on their land, they will have to divide the land first.
 Organizations can group their real estate NFTs however they want, this also help them to easily show which buildings, lands belong to the organizations.
 
