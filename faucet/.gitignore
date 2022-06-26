@@ -1,0 +1,6 @@
+# Rust auto-generated
+target/
+Cargo.lock
+
+# Emacs tempfile
+**/*~
