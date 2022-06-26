@@ -86,7 +86,7 @@ After authorization, authorities will return the modify right's badge or just re
 ### Real Estate Market Place
 Working mostly the same as a NFT market place, making use of an *order book* which keep track of NFT's order.
 The real estate market place is permissioned, only authorized citizens of the community can use the market. Likewise, their real estate NFTs can only be traded through these authorized markets (to prevent trading on "black market" or any 3rd party market).
-After made a sell order, the maker received a *order NFT* to keep track of their order. Later they can use this NFT to cancel the order and take back their real estate NFTs or to take their payment after the order has been filled.
+After made a sell order, the maker received an *order NFT* to keep track of their order. Later they can use this NFT to cancel the order and take back their real estate NFTs or to take their payment after the order has been filled.
 
 ## Security, Utility
 
