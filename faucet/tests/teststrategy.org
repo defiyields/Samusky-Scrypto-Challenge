@@ -1,0 +1,62 @@
+The tests use the resim command line tool to run smart contracts. If
+you run these tests then any configuration you have in resim will be
+lost.
+
+Since resim is a global resource and the tests don't want interference
+from each other tests have to be run single-threaded, like this:
+cargo test -- --test-threads=1
+
+* Invariants in need of test
+| Invariant                                                            | Tested where                          |
+|----------------------------------------------------------------------+---------------------------------------|
+| instantiate: Try to set negative tap_amount                          | init_negative_tap_amount              |
+| instantiate: Try to set zero tap_amount                              | zero_negative_tap_amount              |
+| instantiate: Try to set negative taps_per_epoch                      | init_negative_taps_per_epoch          |
+| instantiate: Try to set zero taps_per_epoch                          | init_zero_taps_per_epoch              |
+| Can tap infinite times per epoch when no per epoch limit set         | tap_many_times_when_no_epoch_limit    |
+| Cannot tap more times than allowed per epoch                         | scenario_1                            |
+| Taps per epoch resets on new epoch                                   | scenario_1                            |
+| Taps per epoch reset isn't cumulative                                | scenario_1                            |
+| Admin badge is created when needed                                   | scenario_1                            |
+| Admin badge is not created when not needed                           | no_admin_badge_when_not_needed        |
+| Can create faucet with taker badges                                  | scenario_2                            |
+| Can create faucet without taker badges                               | scenario_1                            |
+| Faucet with empty call allowed has admin badge                       | has_admin_badge_when_empty_allowed    |
+| Faucet without stranger_fill has admin badge                         | has_admin_badge_when_no_stranger_fill |
+| Faucet is created containing the funds provided                      | scenario_1                            |
+| Faucet is created with the specified tap_amount                      | scenario_1                            |
+| Faucet is created with the specified taps_per_epoch                  | scenario_1                            |
+| gimme(): Faucet with taker badge set only allows takers to tap       | scenario_2                            |
+| gimme(): Faucet without taker badge set allows anyone to tap         | scenario_1                            |
+| gimme(): Cannot use admin badge when taker badge is needed           | scenario_2                            |
+| gimme(): Funds tapped are actually deducted from faucet              | scenario_1                            |
+| gimme(): Funds tapped are actually deposited to caller               | scenario_1                            |
+| gimme(): Taker badge can be shared between faucets                   | scenario_2                            |
+| gimme(): Taker badges can be different between faucets               | scenario_2                            |
+| fill(): Faucet without stranger_fill set only allows admin to fill   | scenario_2                            |
+| fill(): Cannot use taker badge to fill                               | scenario_2                            |
+| fill(): Faucet with stranger_fill set allows everyone to fill        | scenario_1                            |
+| fill(): Fails when trying to fill with unsupported asset type        | scenario_2                            |
+| fill(): Funds get added to faucet                                    | scenario_1                            |
+| empty(): Faucet with empty call allowed actually allows this call    | scenario_1                            |
+| empty(): Only user with admin badge can call this                    | scenario_1                            |
+| empty(): Can't use taker badge to call this                          | scenario_2                            |
+| empty(): Faucet without empty call allowed disallows this call       | call_empty_when_disallowed            |
+| empty(): Funds are deducted from faucet                              | scenario_1                            |
+| empty(): Funds are deposited to caller                               | scenario_1                            |
+| read_funding(): Return values correspond to setup and current state  | scenario_1                            |
+| read_funding(): Should be callable by non-admin                      | scenario_1                            |
+| read_taps_remaining_epoch(): Panics when no epoch limit              | read_taps_remaining_when_not_set      |
+| read_taps_remaining_epoch(): Works when new epoch but no taps yet    | scenario_1                            |
+| read_taps_remaining_epoch(): Works after first tap of new epoch      | scenario_1                            |
+| read_taps_remaining_epoch(): Should be callable by non-admin         | scenario_1                            |
+| read_config(): Returns values as configured when taps_per_epoch set  | scenario_1                            |
+| read_config(): Returns values as configured when taps_per_epoch=None | read_taps_remaining_when_not_set      |
+| read_config(): Should be callable by non-admin                       | scenario_1                            |
+| read_admin_badge_address(): Correct return when admin badge set      | scenario_1                            |
+| read_admin_badge_address(): Panics when admin badge not set          | no_admin_badge_when_not_needed        |
+| read_admin_badge_address(): Should be callable by non-admin          | scenario_1                            |
+| read_taker_badge_address(): Correct return when taker badge set      | scenario_2                            |
+| read_taker_badge_address(): Returns None when taker badge not set    | scenario_1                            |
+| read_taker_badge_address(): Should be callable by non-admin          | scenario_2                            |
+|----------------------------------------------------------------------+---------------------------------------|
