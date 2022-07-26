@@ -1,0 +1,2 @@
+CALL_METHOD ComponentAddress("$admin") "create_proof" ResourceAddress("$admin_badge");
+CALL_METHOD ComponentAddress("$component") "resove_dispute" 1u64 30u8;
