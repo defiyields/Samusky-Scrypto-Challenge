@@ -30,6 +30,7 @@ DexC2C is a decentralized RADIX token otc trading service that allows you to cre
 | p1      | buyer     |
 | p2      | seller                       |
 
+windows shell
 ```shell
 scrypto build
 resim reset
@@ -50,13 +51,39 @@ $p2_priv=($result[3]).substring("Private key: ".length,($result[3]).length-"Priv
 $xrd='030000000000000000000000000000000000000000000000000004'
 ```
 
+MacOS shell
+```shell
+scrypto build
+resim reset
+result=$(resim new-account)
+export admin=$(echo $result|grep "Account component address: "|awk -F ": " '{print $2}'|awk -F " " '{print $1}')
+export admin_priv=$(echo $result|grep "Private key:" |awk -F "Private key: " '{print $2}'|awk -F "" '{print $1}')
+result=$(resim new-account)
+export p1=$(echo $result|grep "Account component address: "|awk -F ": " '{print $2}'|awk -F " " '{print $1}')
+export p1_priv=$(echo $result|grep "Private key:" |awk -F "Private key: " '{print $2}')
+result=$(resim new-account)
+export p2=$(echo $result|grep "Account component address: "|awk -F ": " '{print $2}'|awk -F " " '{print $1}')
+export p2_priv=$(echo $result|grep "Private key:" |awk -F "Private key: " '{print $2}')
+
+export $xrd='030000000000000000000000000000000000000000000000000004'
+result=$(resim publish ".")
+export package=$(echo $result | awk -F ": " '{print $2}')
+```
+
+
 * Init component
   
 ```shell
-resim set-default-account $admin $admin_priv
 $result=resim call-function $package DexC2C new 100
 $component=($result[10]).substring('鈹斺攢 Component: '.length, ($result[10]).length-'鈹斺攢 Component: '.length)
 $ticket=($result[13]).substring('鈹斺攢 Resource: '.length, ($result[13]).length-'鈹斺攢 Resource: '.length)
+```
+
+MacOS shell
+```
+result=$(resim call-function $package DexC2C "new" 100)
+export component=$(echo $result | grep "Component: "| awk -F "Component: " '{print $2}' | awk -F " " '{print $1}')
+export ticket=$(echo $result | grep "Resource: " | awk -F "Resource: " '{if (NR==1) print $4}')
 ```
 
 * An example of a complete process including arbitration
@@ -74,12 +101,12 @@ $ticket=($result[13]).substring('鈹斺攢 Resource: '.length, ($result[13]).len
 
 3: seller ask
     resim set-default-account $p2 $p2_priv
-    resim call-method $component ask $p1_id $p2_id $xrd 10 'Ask dispute test' '#0000000000000002',$ticket 
+    resim call-method $component "ask" $p1_id $p2_id $xrd 10 "Ask dispute test" "#0000000000000002,$ticket"
     resim call-method $component get_pending_order_by_id 1
 
 4: buyer accept
     resim set-default-account $p1 $p1_priv
-    resim call-method $component accept 1 '#0000000000000001',$ticket
+    resim call-method $component accept 1 "#0000000000000001,$ticket"
     resim call-method $component get_pending_order_by_id 1
 
 5: seller escrow
